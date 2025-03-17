@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_extensions',
+    'npc_manager',
+    'campaign_manager',
 ]
 
 MIDDLEWARE = [
