@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'npc_manager',
+    'character_manager',
     'campaign_manager',
 ]
 
