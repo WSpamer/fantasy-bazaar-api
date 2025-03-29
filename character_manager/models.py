@@ -54,3 +54,15 @@ class Character(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Relationship(models.Model):
+
+    character = models.ForeignKey(Character, on_delete=models.CASCADE)
+    npc = models.ForeignKey(NPC, on_delete=models.CASCADE)
+    rating = models.IntegerField()
+    notes = models.TextField()
+    # TODO: Add a foreign key to the User model
+
+    def __str__(self):
+        return self.rating
