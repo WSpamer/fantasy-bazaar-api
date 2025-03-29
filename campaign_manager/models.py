@@ -1,5 +1,4 @@
 from django.db import models
-from character_manager.models import NPC
 
 
 # Create your models here.
