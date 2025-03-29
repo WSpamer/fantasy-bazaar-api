@@ -1,4 +1,5 @@
 from django.db import models
+from campaign_manager.models import Campaign
 
 
 # Create your models here.
@@ -39,6 +40,17 @@ class NPC(models.Model):
     notes = models.TextField()
     created = models.DateField()
     updated = models.DateField()
+
+    def __str__(self):
+        return self.name
+
+
+# TODO: Add a foreign key to the User model
+class Character(models.Model):
+
+    name = models.CharField(max_length=100, unique=True)
+    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
+    # TODO: Add a foreign key to the User model
 
     def __str__(self):
         return self.name
