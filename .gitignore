@@ -26,3 +26,5 @@ __pycache__/
 local_settings.py
 
 ### Custom Data ###
+*.png
+*.dot
