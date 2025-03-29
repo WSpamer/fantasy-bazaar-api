@@ -57,21 +57,11 @@ class Country(models.Model):
         return self.name
 
 
-class Location(models.Model):
-
-    name = models.CharField(max_length=100, unique=True)
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-
-
-class PointsOfInterest(models.Model):
+class PointOfInterest(models.Model):
 
     name = models.CharField(max_length=100, unique=True)
     type = models.CharField(max_length=100)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
     description = models.TextField()
     created = models.DateField()
     updated = models.DateField()
@@ -83,8 +73,17 @@ class PointsOfInterest(models.Model):
 class Town(models.Model):
 
     name = models.CharField(max_length=100, unique=True)
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    pointOfInterest = models.ForeignKey(PointOfInterest, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
+class Building(models.Model):
+
+    name = models.CharField(max_length=100, unique=True)
+    town = models.ForeignKey(Town, on_delete=models.CASCADE)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
