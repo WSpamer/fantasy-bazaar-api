@@ -1,12 +1,28 @@
 from django.db import models
+from character_manager.models import NPC
 
 
 # Create your models here.
+# TODO: Add a field to NPC to link it to a campaign
+# TODO: Add a field to identify if a campaign is active or inactive
+# TODO: Add a field to identify if a campaign is homebrew or not
+class Campaign(models.Model):
+
+    name = models.CharField(max_length=100, unique=True)
+    source = models.CharField(max_length=100)  # e.g. D&D, Pathfinder
+    is_homebrew = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Faction(models.Model):
 
     name = models.CharField(max_length=100, unique=True)
     status = models.CharField(max_length=100)
     description = models.TextField()
+    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     created = models.DateField()
     updated = models.DateField()
 
@@ -26,6 +42,7 @@ class OrganizationType(models.Model):
 class Organization(models.Model):
 
     name = models.CharField(max_length=100, unique=True)
+    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     description = models.TextField()
     type = models.ForeignKey(OrganizationType, on_delete=models.CASCADE)
     created = models.DateField()
@@ -48,6 +65,7 @@ class Country(models.Model):
     name = models.CharField(max_length=100, unique=True)
     relationship = models.TextField()
     religion = models.ForeignKey(Religion, on_delete=models.CASCADE)
+    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     unique_laws = models.TextField()
     notes = models.TextField()
     created = models.DateField()
